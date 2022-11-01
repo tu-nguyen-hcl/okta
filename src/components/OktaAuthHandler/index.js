@@ -2,11 +2,12 @@ import React from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
 import { OktaAuth } from '@okta/okta-auth-js';
-import Home from '../Home';
-import Login from '../Login/Login';
+import { Home, Login } from '../../apps/index';
 import Protected from '../ProtectedPage';
-import { oktaAuthConfig, oktaSignInConfig } from '../../config';
+import { oktaAuthConfig } from '../../config';
 import OktaProvider from '../OktaContext';
+import { routes } from '../../routes';
+import AuthorizeWrapper from '../AuthorizeWrapper';
 
 const oktaAuth = new OktaAuth(oktaAuthConfig);
 
@@ -23,12 +24,21 @@ const OktaAuthHandler = () => {
     >
       <OktaProvider>
         <Switch>
-          <Route path='/' exact={true} component={Home} />
+          {routes.map(({ Component, path, exact, redirectTo, roles }) => {
+            return (
+              <Route
+                path={path}
+                key={path}
+                exact={exact}
+                render={() => (
+                  <AuthorizeWrapper redirectTo={redirectTo} roles={roles}>
+                    <Component />
+                  </AuthorizeWrapper>
+                )}
+              />
+            );
+          })}
           <SecureRoute path='/protected' component={Protected} />
-          <Route
-            path='/login'
-            render={() => <Login config={oktaSignInConfig} />}
-          />
           <Route path='/login/callback' component={LoginCallback} />s
         </Switch>
       </OktaProvider>

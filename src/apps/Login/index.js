@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import LoginForm from './LoginForm';
-import { OktaContext } from '../OktaContext';
+import LoginForm from '../../components/Login';
+import { OktaContext } from '../../components/OktaContext';
 
-const Login = ({ config }) => {
+const Login = () => {
   const { oktaAuth, authState, setError } = useContext(OktaContext);
 
   const onSuccess = async (tokens) => {
@@ -21,8 +21,7 @@ const Login = ({ config }) => {
     return <Redirect to={{ pathname: '/' }} />;
   }
 
-  return <LoginForm config={config} onSuccess={onSuccess} onError={onError} />;
-  // return <OktaSignInWidget config={config} onSuccess={onSuccess} onError={onError} />;
+  return <LoginForm onSuccess={onSuccess} onError={onError} />;
 };
 
 export default Login;

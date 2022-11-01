@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import { OktaContext } from '../OktaContext';
 import OktaJwtVerifier from '@okta/jwt-verifier';
 import { oktaAuthConfig } from '../../config';
+import { OktaContext } from '../../components/OktaContext';
 
 const oktaJwtVerifier = new OktaJwtVerifier({
   issuer: oktaAuthConfig.issuer, // issuer required
