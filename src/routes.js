@@ -1,6 +1,8 @@
 import { Home, Login } from './apps';
 
 export const routes = [
-  { Component: Home, exact: true, path: '/' },
-  { Component: Login, path: '/login' },
+  { component: Home, exact: true, path: '/', loginRequired: true },
+  { component: () => <p>Admin page</p>, path: '/admin', roles: ['Admin'] },
+  { component: () => <p>Worker page</p>, path: '/worker', roles: ['Worker', 'User'] },
+  { component: Login, path: '/login' },
 ];

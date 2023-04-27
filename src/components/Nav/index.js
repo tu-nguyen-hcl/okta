@@ -8,8 +8,8 @@ const ButtonSubmit = () => {
   const { oktaAuth, authState } = useOktaAuth();
 
   const handleLogout = async () => {
-    await oktaAuth.signOut();
     localStorage.clear();
+    await oktaAuth.signOut();
   };
 
   if (authState.isAuthenticated)
@@ -59,10 +59,20 @@ const LoginHandler = () => {
               <li className='nav-item'>
                 <Link
                   style={{ textDecoration: 'none', color: 'white' }}
-                  to='/protected'
+                  to='/admin'
                 >
                   <button className='btn btn-primary me-2 shadow-none'>
-                    Protected
+                    Admin
+                  </button>
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link
+                  style={{ textDecoration: 'none', color: 'white' }}
+                  to='/worker'
+                >
+                  <button className='btn btn-primary me-2 shadow-none'>
+                    Worker
                   </button>
                 </Link>
               </li>

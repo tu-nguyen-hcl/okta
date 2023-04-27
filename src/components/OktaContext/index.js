@@ -26,6 +26,7 @@ function OktaProvider({ children }) {
           sessionToken,
         });
         oktaAuth.tokenManager.setTokens(tokens);
+        console.log('tokens', tokens);
         history.push('/');
         break;
       }
